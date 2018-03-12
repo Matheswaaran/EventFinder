@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
-    private EditText username, password;
+    private EditText username, password, rePassword;
     private Button btnSignup;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,18 @@ public class SignupActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        username = (EditText)findViewById(R.id.username);
+        username = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
-        btnSignup = (Button)findViewById(R.id.buttonSignup);
-        progressDialog = new ProgressDialog(this);
+        rePassword = (EditText)findViewById(R.id.re_password);
+        btnSignup = (Button)findViewById(R.id.btnSignUp);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerUser();
+            }
+        });
 
     }
 
@@ -41,14 +50,15 @@ public class SignupActivity extends AppCompatActivity {
 
         String email = username.getText().toString().trim();
         String pass = password.getText().toString().trim();
+        String repass = rePassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)){
             Toast.makeText(getApplicationContext(), "Enter a email id.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (TextUtils.isEmpty(pass)){
-            Toast.makeText(getApplicationContext(), "Enter a Password.", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(pass) && TextUtils.isEmpty(repass)){
+            Toast.makeText(getApplicationContext(), "Enter the Passwords.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -57,28 +67,29 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        progressDialog.setMessage("Registering Please Wait...");
-        progressDialog.show();
+        if (pass.equals(repass)){
 
-        firebaseAuth.createUserWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(SignupActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                        }else{
-                            Toast.makeText(SignupActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.VISIBLE);
+
+            firebaseAuth.createUserWithEmailAndPassword(email, pass)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.GONE);
+                            if (task.isSuccessful()){
+                                Toast.makeText(SignupActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(SignupActivity.this,"Registration Error",Toast.LENGTH_LONG).show();
+                            }
                         }
-                        progressDialog.dismiss();
-                    }
-                });
-    }
-
-    public void onClick(View view){
-        registerUser();
+                    });
+        }else{
+            Toast.makeText(getApplicationContext(), "Passwords doesn't match.", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 
     public void openLogin(View view){
-        startActivity(new Intent(this, SignupActivity.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

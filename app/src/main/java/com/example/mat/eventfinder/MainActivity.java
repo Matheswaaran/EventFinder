@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private EditText username, password;
     private Button btnLogin;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -36,10 +37,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),HomeActivity.class));
         }
 
-        username = (EditText)findViewById(R.id.username);
+        username = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
-        btnLogin = (Button)findViewById(R.id.buttonLogin);
-        progressDialog = new ProgressDialog(this);
+        btnLogin = (Button)findViewById(R.id.btnLogin);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
+            }
+        });
 
 
     }
@@ -59,29 +67,24 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        progressDialog.setMessage("Authendicating Please Wait...");
-        progressDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
 
         firebaseAuth.signInWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        progressBar.setVisibility(View.GONE);
                         if (task.isSuccessful()){
                             Toast.makeText(MainActivity.this,"Successfully authendicated",Toast.LENGTH_LONG).show();
                             startActivity(new Intent(getApplicationContext(),HomeActivity.class));
                         }else{
                             Toast.makeText(MainActivity.this,"Authendication Error",Toast.LENGTH_LONG).show();
                         }
-                        progressDialog.dismiss();
                     }
                 });
     }
 
-    public void onClick(View view){
-        loginUser();
-    }
-
-    public void forgotPass(View view){
-        startActivity(new Intent(this,ForgotPassActivity.class));
+    public void showSignUp(View view){
+        startActivity(new Intent(getApplicationContext(),SignupActivity.class));
     }
 }

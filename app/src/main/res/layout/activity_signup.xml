@@ -1,50 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.mat.eventfinder.SignupActivity">
 
-    <LinearLayout
-        android:layout_centerVertical="true"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <EditText
-            android:id="@+id/username"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="Enter email"
-            android:inputType="textEmailAddress" />
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:titleTextAppearance="@style/ToolbarTitle"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:hint="Enter password"
-            android:inputType="textPassword" />
+    </android.support.design.widget.AppBarLayout>
 
-        <Button
-            android:id="@+id/buttonSignup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Signup"
-            android:onClick="onClick"/>
+    <include layout="@layout/content_signup" />
+
+    <LinearLayout
+        android:id="@+id/login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/color_accent"
+        android:gravity="center_vertical|center_horizontal"
+        android:minHeight="?android:actionBarSize"
+        android:onClick="openLogin"
+        android:orientation="horizontal"
+        android:padding="@dimen/layout_margin_small">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already a Member? SignIn"
-            android:layout_gravity="center"
-            android:onClick="openLogin"/>
+            android:text="@string/have_an_account_question"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_extra_large" />
 
-
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/right_arrow"
+            android:padding="@dimen/padding_small"
+            app:srcCompat="@drawable/ic_arrow_right_white_24dp" />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
