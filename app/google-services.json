@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "715749548376",
+    "firebase_url": "https://eventfinder-mat.firebaseio.com",
+    "project_id": "eventfinder-mat",
+    "storage_bucket": "eventfinder-mat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715749548376:android:ba463387e9df439d",
+        "android_client_info": {
+          "package_name": "com.example.mat.eventfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715749548376-g8ebapuhb3rhc267oaj1pp28kv710i05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRDlZ-uqsDElO0FCUVggcuHLm0aCtx36A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
