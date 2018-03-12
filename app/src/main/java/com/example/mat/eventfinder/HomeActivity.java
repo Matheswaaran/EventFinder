@@ -1,5 +1,7 @@
 package com.example.mat.eventfinder;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,11 +15,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.mat.eventfinder.Fragments.AddEventFragment;
+import com.example.mat.eventfinder.Fragments.UserProfileFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth firebaseAuth;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +37,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(getApplicationContext(),SignupActivity.class));
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firebaseAuth.signOut();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-            }
-        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                setTitle("Add a new Event");
+                ft.replace(R.id.homeFrameLayout,new AddEventFragment());
+                ft.commit();
+                navigationView.setCheckedItem(R.id.addEvents);
+            }
+        });
+
     }
 
     @Override
@@ -88,16 +97,25 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         if (id == R.id.addEvents) {
-            // Handle the camera action
+            setTitle("Add a new Event");
+            ft.replace(R.id.homeFrameLayout,new AddEventFragment());
         } else if (id == R.id.viewEvents) {
 
         } else if (id == R.id.userProfile) {
+            setTitle("User Profile");
+            ft.replace(R.id.homeFrameLayout, new UserProfileFragment());
+
+        } else if (id == R.id.userSettings) {
 
         } else if (id == R.id.userLogout) {
-
+            firebaseAuth.signOut();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
+
+        ft.commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

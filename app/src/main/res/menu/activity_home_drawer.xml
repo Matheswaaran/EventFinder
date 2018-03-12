@@ -12,19 +12,17 @@
             android:id="@+id/viewEvents"
             android:icon="@drawable/ic_menu_gallery"
             android:title="View Events" />
+        <item
+            android:id="@+id/userProfile"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="User Profile" />
+        <item
+            android:id="@+id/userSettings"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Settings" />
+        <item
+            android:id="@+id/userLogout"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Logout" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/userProfile"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Profile" />
-            <item
-                android:id="@+id/userLogout"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Logout" />
-        </menu>
-    </item>
-
 </menu>
