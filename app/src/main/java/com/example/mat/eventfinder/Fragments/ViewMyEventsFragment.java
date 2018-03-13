@@ -100,26 +100,26 @@ public class ViewMyEventsFragment extends Fragment {
 
     public void prepareEventsData(){
 
-        Events events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Ji","12","23","Mdu");
-        eventsList.add(events);
+//        Events events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
+//        events = new Events("Ji","12","23","Mdu");
+//        eventsList.add(events);
 
         viewEventAdapter.notifyDataSetChanged();
     }

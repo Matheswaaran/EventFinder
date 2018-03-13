@@ -90,25 +90,7 @@ public class ViewEventsFragment extends Fragment {
 
     public void prepareEventsData(){
 
-        Events events = new Events("Hello1","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello2","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello3","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello4","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello5","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
-        eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        Events events = new Events("1","Hello1","12","23","Mdu","123","Mat","444");
         eventsList.add(events);
 
         viewEventAdapter.notifyDataSetChanged();

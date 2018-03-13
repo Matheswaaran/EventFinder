@@ -5,17 +5,21 @@ package com.example.mat.eventfinder.Extras;
  */
 
 public class Events {
-    private String title, startTime, endTime, location;
+    private String eventId, title, startTime, endTime, location, desc, organiser, uid;
 
     public Events(){
 
     }
 
-    public Events(String title, String startTime, String endTime, String location){
+    public Events(String eventId, String title, String startTime, String endTime, String location, String desc, String organiser, String uid){
+        this.eventId = eventId;
         this.title = title;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
+        this.desc = desc;
+        this.organiser = organiser;
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -48,5 +52,37 @@ public class Events {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getOrganiser() {
+        return organiser;
+    }
+
+    public void setOrganiser(String organiser) {
+        this.organiser = organiser;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getEventId() {
+        return eventId;
+    }
+
+    public void setEventId(String eventId) {
+        this.eventId = eventId;
     }
 }
