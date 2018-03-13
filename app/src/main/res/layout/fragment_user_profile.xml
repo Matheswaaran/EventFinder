@@ -94,7 +94,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:minHeight="@dimen/profile_menu_height"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:onClick="openEditProfile">
 
                         <ImageView
                             android:layout_width="wrap_content"

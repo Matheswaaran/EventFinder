@@ -142,4 +142,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         firebaseAuth.signOut();
         startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
+
+    public void openEditProfile(View view){
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.homeFrameLayout,new EditProfileFragment());
+        ft.commit();
+        navigationView.setCheckedItem(R.id.editProfile);
+        setTitle("Edit User Profile");
+    }
 }
