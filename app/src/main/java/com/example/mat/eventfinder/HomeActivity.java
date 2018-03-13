@@ -16,7 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mat.eventfinder.Fragments.AddEventFragment;
+import com.example.mat.eventfinder.Fragments.EditProfileFragment;
+import com.example.mat.eventfinder.Fragments.HomeFragment;
 import com.example.mat.eventfinder.Fragments.UserProfileFragment;
+import com.example.mat.eventfinder.Fragments.ViewEventsFragment;
+import com.example.mat.eventfinder.Fragments.ViewMyEventsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,6 +50,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        setTitle("Home");
+        ft.replace(R.id.homeFrameLayout,new HomeFragment());
+        ft.commit();
+        navigationView.setCheckedItem(R.id.homeFragment);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +67,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 navigationView.setCheckedItem(R.id.addEvents);
             }
         });
-
     }
 
     @Override
@@ -99,17 +108,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        if (id == R.id.addEvents) {
+        if (id == R.id.homeFragment){
+            setTitle("Home");
+            ft.replace(R.id.homeFrameLayout, new HomeFragment());
+        } else if (id == R.id.addEvents) {
             setTitle("Add a new Event");
             ft.replace(R.id.homeFrameLayout,new AddEventFragment());
         } else if (id == R.id.viewEvents) {
-
+            setTitle("All Events");
+            ft.replace(R.id.homeFrameLayout, new ViewEventsFragment());
+        } else if(id == R.id.viewMyEvents){
+            setTitle("My Events");
+            ft.replace(R.id.homeFrameLayout, new ViewMyEventsFragment());
         } else if (id == R.id.userProfile) {
             setTitle("User Profile");
             ft.replace(R.id.homeFrameLayout, new UserProfileFragment());
-
-        } else if (id == R.id.userSettings) {
-
+        } else if (id == R.id.editProfile){
+            setTitle("Edit User Profile");
+            ft.replace(R.id.homeFrameLayout, new EditProfileFragment());
         } else if (id == R.id.userLogout) {
             firebaseAuth.signOut();
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -120,5 +136,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void LogoutClick(View view){
+        firebaseAuth.signOut();
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 }

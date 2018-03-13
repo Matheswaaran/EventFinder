@@ -138,6 +138,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:minHeight="@dimen/profile_menu_height"
+                        android:onClick="LogoutClick"
                         android:orientation="horizontal">
 
                         <ImageView

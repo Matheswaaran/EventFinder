@@ -21,7 +21,7 @@ import com.example.mat.eventfinder.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewEventsFragment extends Fragment {
+public class ViewMyEventsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,8 +37,17 @@ public class ViewEventsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ViewEventsFragment() {
+    public ViewMyEventsFragment() {
         // Required empty public constructor
+    }
+
+    public static ViewMyEventsFragment newInstance(String param1, String param2) {
+        ViewMyEventsFragment fragment = new ViewMyEventsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -62,6 +71,7 @@ public class ViewEventsFragment extends Fragment {
         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         recyclerView.addItemDecoration(new RecyclerViewDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
         recyclerView.setAdapter(viewEventAdapter);
 
@@ -90,25 +100,25 @@ public class ViewEventsFragment extends Fragment {
 
     public void prepareEventsData(){
 
-        Events events = new Events("Hello1","12","23","Mdu");
+        Events events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello2","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello3","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello4","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello5","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
-        events = new Events("Hello","12","23","Mdu");
+        events = new Events("Ji","12","23","Mdu");
         eventsList.add(events);
 
         viewEventAdapter.notifyDataSetChanged();

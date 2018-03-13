@@ -5,24 +5,32 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/homeFragment"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
             android:id="@+id/addEvents"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@android:drawable/ic_input_add"
             android:title="Add Event" />
         <item
+            android:id="@+id/viewMyEvents"
+            android:icon="@drawable/ic_date_range_black_24dp"
+            android:title="View My Events" />
+        <item
             android:id="@+id/viewEvents"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_date_range_black_24dp"
             android:title="View Events" />
         <item
             android:id="@+id/userProfile"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_account_circle_grey_24dp"
             android:title="User Profile" />
         <item
-            android:id="@+id/userSettings"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Settings" />
+            android:id="@+id/editProfile"
+            android:icon="@drawable/ic_edit_black_24dp"
+            android:title="Edit Profile" />
         <item
             android:id="@+id/userLogout"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_logout"
             android:title="Logout" />
     </group>
 </menu>

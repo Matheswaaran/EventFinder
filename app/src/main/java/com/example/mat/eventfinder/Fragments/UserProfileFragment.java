@@ -1,6 +1,7 @@
 package com.example.mat.eventfinder.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,9 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mat.eventfinder.HomeActivity;
+import com.example.mat.eventfinder.MainActivity;
 import com.example.mat.eventfinder.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class UserProfileFragment extends Fragment {
+
+    private FirebaseAuth firebaseAuth;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,6 +40,8 @@ public class UserProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
