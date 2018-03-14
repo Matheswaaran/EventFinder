@@ -1,5 +1,6 @@
 package com.example.mat.eventfinder.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,14 @@ import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
 import com.example.mat.eventfinder.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +36,13 @@ public class ViewMyEventsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private List<Events> eventsList = new ArrayList<>();
+    private List<Events> eventsList;
     private ViewEventAdapter viewEventAdapter;
     private RecyclerView recyclerView;
+    private DatabaseReference eventDatabaseRef;
+    private FirebaseUser currentFirebaseUser;
+    private ProgressDialog progressDialog;
+    private Query qry;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,15 +78,20 @@ public class ViewMyEventsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_events, container, false);
 
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        eventDatabaseRef = FirebaseDatabase.getInstance().getReference("events");
+        qry = eventDatabaseRef.orderByChild("uid").equalTo(currentFirebaseUser.getUid().toString());
+        progressDialog = new ProgressDialog(getContext());
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        viewEventAdapter = new ViewEventAdapter(eventsList);
         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
         recyclerView.addItemDecoration(new RecyclerViewDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
-        recyclerView.setAdapter(viewEventAdapter);
+
+        prepareEventsData();
 
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new RecyclerViewTouchListener.ClickListener() {
             @Override
@@ -88,8 +106,6 @@ public class ViewMyEventsFragment extends Fragment {
             }
         }));
 
-        prepareEventsData();
-
         return view;
     }
 
@@ -100,27 +116,27 @@ public class ViewMyEventsFragment extends Fragment {
 
     public void prepareEventsData(){
 
-//        Events events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
-//        events = new Events("Ji","12","23","Mdu");
-//        eventsList.add(events);
+        progressDialog.setMessage("Loading Data");
+        progressDialog.show();
 
-        viewEventAdapter.notifyDataSetChanged();
+        qry.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    Events value = dataSnapshot1.getValue(Events.class);
+                    eventsList.add(value);
+                }
+
+                viewEventAdapter = new ViewEventAdapter(eventsList);
+                recyclerView.setAdapter(viewEventAdapter);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 }

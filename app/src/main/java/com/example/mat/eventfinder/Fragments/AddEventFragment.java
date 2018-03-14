@@ -74,7 +74,7 @@ public class AddEventFragment extends Fragment {
             }
         });
 
-        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+        currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         eventDatabaseRef = FirebaseDatabase.getInstance().getReference("events");
 

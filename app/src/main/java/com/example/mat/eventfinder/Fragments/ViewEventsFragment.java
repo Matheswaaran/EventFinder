@@ -1,5 +1,6 @@
 package com.example.mat.eventfinder.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +18,12 @@ import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
 import com.example.mat.eventfinder.R;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +34,11 @@ public class ViewEventsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private List<Events> eventsList = new ArrayList<>();
+    private List<Events> eventsList;
     private ViewEventAdapter viewEventAdapter;
     private RecyclerView recyclerView;
+    private DatabaseReference eventDatabaseRef;
+    private ProgressDialog progressDialog;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -56,14 +65,19 @@ public class ViewEventsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_view_events, container, false);
 
+        eventDatabaseRef = FirebaseDatabase.getInstance().getReference("events");
+
+        eventsList = new ArrayList<Events>();
+        progressDialog = new ProgressDialog(getContext());
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
 
-        viewEventAdapter = new ViewEventAdapter(eventsList);
         RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerViewDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
-        recyclerView.setAdapter(viewEventAdapter);
+
+        prepareEventData();
 
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new RecyclerViewTouchListener.ClickListener() {
             @Override
@@ -74,11 +88,10 @@ public class ViewEventsFragment extends Fragment {
 
             @Override
             public void onLongClick(View view, int position) {
-
+                Events events = eventsList.get(position);
+                Toast.makeText(getContext(), events.getTitle() + " is long clicked", Toast.LENGTH_SHORT).show();
             }
         }));
-
-        prepareEventsData();
 
         return view;
     }
@@ -88,11 +101,30 @@ public class ViewEventsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void prepareEventsData(){
+    public void prepareEventData(){
 
-        Events events = new Events("1","Hello1","12","23","Mdu","123","Mat","444");
-        eventsList.add(events);
+        progressDialog.setMessage("Loading Data");
+        progressDialog.show();
 
-        viewEventAdapter.notifyDataSetChanged();
+        eventDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
+                    Events value = dataSnapshot1.getValue(Events.class);
+                    eventsList.add(value);
+                }
+
+                viewEventAdapter = new ViewEventAdapter(eventsList);
+                recyclerView.setAdapter(viewEventAdapter);
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+        });
     }
 }
