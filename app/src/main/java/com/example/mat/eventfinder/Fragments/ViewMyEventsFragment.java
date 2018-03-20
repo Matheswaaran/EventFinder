@@ -20,6 +20,7 @@ import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
 import com.example.mat.eventfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +44,7 @@ public class ViewMyEventsFragment extends Fragment {
     private FirebaseUser currentFirebaseUser;
     private ProgressDialog progressDialog;
     private Query qry;
+    private RecyclerView.LayoutManager eLayoutManager;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,17 +78,17 @@ public class ViewMyEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_view_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_my_events, container, false);
 
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        eventsList = new ArrayList<Events>();
 
         eventDatabaseRef = FirebaseDatabase.getInstance().getReference("events");
-        qry = eventDatabaseRef.orderByChild("uid").equalTo(currentFirebaseUser.getUid().toString());
         progressDialog = new ProgressDialog(getContext());
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
-        RecyclerView.LayoutManager eLayoutManager = new LinearLayoutManager(getContext());
+        eLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerViewDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
@@ -119,12 +121,14 @@ public class ViewMyEventsFragment extends Fragment {
         progressDialog.setMessage("Loading Data");
         progressDialog.show();
 
-        qry.addListenerForSingleValueEvent(new ValueEventListener() {
+        eventDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
                     Events value = dataSnapshot1.getValue(Events.class);
-                    eventsList.add(value);
+                    if (value.getUid().equals(currentFirebaseUser.getUid())){
+                        eventsList.add(value);
+                    }
                 }
 
                 viewEventAdapter = new ViewEventAdapter(eventsList);
@@ -136,6 +140,7 @@ public class ViewMyEventsFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
+
             }
         });
     }

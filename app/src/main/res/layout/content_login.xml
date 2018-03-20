@@ -71,6 +71,15 @@
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginForgotPass"
+            android:text="Forgot Password? Click Here"
+            android:textAlignment="center"
+            android:textColor="@color/color_accent"
+            android:onClick="openForgotPassword"/>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

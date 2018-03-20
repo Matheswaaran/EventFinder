@@ -87,4 +87,8 @@ public class MainActivity extends AppCompatActivity {
     public void showSignUp(View view){
         startActivity(new Intent(getApplicationContext(),SignupActivity.class));
     }
+
+    public void openForgotPassword(View view){
+        startActivity(new Intent(this, ForgotPassActivity.class));
+    }
 }
