@@ -5,7 +5,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,33 +14,33 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mat.eventfinder.Adapters.ViewEventAdapter;
+import com.example.mat.eventfinder.Adapters.ViewInterviewAdapter;
 import com.example.mat.eventfinder.Extras.Events;
+import com.example.mat.eventfinder.Extras.Interviews;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
 import com.example.mat.eventfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewMyEventsFragment extends Fragment {
+public class ViewMyInterviewsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private List<Events> eventsList;
-    private ViewEventAdapter viewEventAdapter;
+    private List<Interviews> interviewsList;
+    private ViewInterviewAdapter viewInterviewAdapter;
     private RecyclerView recyclerView;
-    private DatabaseReference eventDatabaseRef;
+    private DatabaseReference interviewsDataRef;
     private FirebaseUser currentFirebaseUser;
     private ProgressDialog progressDialog;
     private RecyclerView.LayoutManager eLayoutManager;
@@ -52,12 +51,12 @@ public class ViewMyEventsFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public ViewMyEventsFragment() {
+    public ViewMyInterviewsFragment() {
         // Required empty public constructor
     }
 
-    public static ViewMyEventsFragment newInstance(String param1, String param2) {
-        ViewMyEventsFragment fragment = new ViewMyEventsFragment();
+    public static ViewMyInterviewsFragment newInstance(String param1, String param2) {
+        ViewMyInterviewsFragment fragment = new ViewMyInterviewsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -78,50 +77,33 @@ public class ViewMyEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_view_my_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_view_my_interviews, container, false);
 
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        eventsList = new ArrayList<Events>();
 
-        eventDatabaseRef = FirebaseDatabase.getInstance().getReference("events");
+        interviewsList = new ArrayList<Interviews>();
+
+        interviewsDataRef = FirebaseDatabase.getInstance().getReference("interviews");
         progressDialog = new ProgressDialog(getContext());
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.my_interviews_recycler_view);
 
         eLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(eLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new RecyclerViewDecoration(getContext(), LinearLayoutManager.VERTICAL, 16));
 
-        prepareEventsData();
+        prepareInterviewsData();
 
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new RecyclerViewTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Events events = eventsList.get(position);
-                Toast.makeText(getContext(), events.getEventId() + " is selected!", Toast.LENGTH_SHORT).show();
+                Interviews interviews = interviewsList.get(position);
+                Toast.makeText(getContext(), interviews.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Events events = eventsList.get(position);
-                Query qry = eventDatabaseRef.orderByChild("eventId").equalTo(events.getEventId().toString());
-
-                qry.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        dataSnapshot.getRef().removeValue();
-                        Toast.makeText(getContext(),"Event Deleted!",Toast.LENGTH_SHORT).show();
-                        android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.replace(R.id.homeFrameLayout,new ViewMyEventsFragment());
-                        ft.commit();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
-                    }
-                });
 
             }
         }));
@@ -129,28 +111,22 @@ public class ViewMyEventsFragment extends Fragment {
         return view;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
-
-    public void prepareEventsData(){
-
+    private void prepareInterviewsData() {
         progressDialog.setMessage("Loading Data");
         progressDialog.show();
 
-        eventDatabaseRef.addValueEventListener(new ValueEventListener() {
+        interviewsDataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()){
-                    Events value = dataSnapshot1.getValue(Events.class);
+                    Interviews value = dataSnapshot1.getValue(Interviews.class);
                     if (value.getUid().equals(currentFirebaseUser.getUid())){
-                        eventsList.add(value);
+                        interviewsList.add(value);
                     }
                 }
 
-                viewEventAdapter = new ViewEventAdapter(eventsList);
-                recyclerView.setAdapter(viewEventAdapter);
+                viewInterviewAdapter = new ViewInterviewAdapter(interviewsList);
+                recyclerView.setAdapter(viewInterviewAdapter);
                 progressDialog.dismiss();
             }
 
@@ -161,5 +137,17 @@ public class ViewMyEventsFragment extends Fragment {
 
             }
         });
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

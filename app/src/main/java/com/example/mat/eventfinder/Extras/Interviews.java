@@ -5,7 +5,7 @@ package com.example.mat.eventfinder.Extras;
  */
 
 public class Interviews {
-    private String title, company, salaryPackage, experience, venue, eligibility;
+    private String title, company, salaryPackage, experience, venue, eligibility, uid;
 
     public Interviews(){
 
@@ -65,5 +65,13 @@ public class Interviews {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 }

@@ -334,4 +334,5 @@
     <string name="login_to_view_faqs">Sorry you need to log in to view the FAQs.</string>
     <string name="title_activity_event_deatil">EventDeatilActivity</string>
     <string name="title_activity_event_detail">EventDetailActivity</string>
+    <string name="title_activity_interiew_detail">InteriewDetailActivity</string>
 </resources>

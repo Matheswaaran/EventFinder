@@ -16,10 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.mat.eventfinder.Fragments.AddEventFragment;
+import com.example.mat.eventfinder.Fragments.AddInterviewFragment;
 import com.example.mat.eventfinder.Fragments.EditProfileFragment;
 import com.example.mat.eventfinder.Fragments.HomeFragment;
 import com.example.mat.eventfinder.Fragments.UserProfileFragment;
 import com.example.mat.eventfinder.Fragments.ViewEventsFragment;
+import com.example.mat.eventfinder.Fragments.ViewInterviewsFragment;
 import com.example.mat.eventfinder.Fragments.ViewMyEventsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -65,6 +67,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 ft.replace(R.id.homeFrameLayout,new AddEventFragment());
                 ft.commit();
                 navigationView.setCheckedItem(R.id.addEvents);
+            }
+        });
+
+        fab.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                setTitle("Add a new Interview");
+                ft.replace(R.id.homeFrameLayout,new AddInterviewFragment());
+                ft.commit();
+                navigationView.setCheckedItem(R.id.addInterviews);
+                return true;
             }
         });
     }
@@ -123,6 +137,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.userProfile) {
             setTitle("User Profile");
             ft.replace(R.id.homeFrameLayout, new UserProfileFragment());
+        } else if (id == R.id.viewInterviews){
+            setTitle("Interviews");
+            ft.replace(R.id.homeFrameLayout, new ViewInterviewsFragment());
+        } else if(id == R.id.addInterviews){
+            setTitle("Add an Interview");
+            ft.replace(R.id.homeFrameLayout, new AddInterviewFragment());
         } else if (id == R.id.editProfile){
             setTitle("Edit User Profile");
             ft.replace(R.id.homeFrameLayout, new EditProfileFragment());

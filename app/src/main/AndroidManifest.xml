@@ -36,6 +36,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mat.eventfinder.HomeActivity" />
         </activity>
+        <activity
+            android:name=".InteriewDetailActivity"
+            android:label="@string/title_activity_interiew_detail"
+            android:parentActivityName=".HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.mat.eventfinder.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -5,21 +5,25 @@ package com.example.mat.eventfinder.Extras;
  */
 
 public class Events {
-    private String eventId, title, startTime, endTime, location, desc, organiser, uid;
+    private String eventId, title, startDate, startTime, endDate, endTime, location, desc, organiser, uid, days, amount;
 
     public Events(){
 
     }
 
-    public Events(String eventId, String title, String startTime, String endTime, String location, String desc, String organiser, String uid){
+    public Events(String eventId, String title, String startDate, String startTime, String endDate, String endTime, String location, String desc, String organiser, String uid, String days, String amount){
         this.eventId = eventId;
         this.title = title;
+        this.startDate = startDate;
         this.startTime = startTime;
+        this.endDate = endDate;
         this.endTime = endTime;
         this.location = location;
         this.desc = desc;
         this.organiser = organiser;
         this.uid = uid;
+        this.days = days;
+        this.amount = amount;
     }
 
     public String getTitle() {
@@ -84,5 +88,37 @@ public class Events {
 
     public void setEventId(String eventId) {
         this.eventId = eventId;
+    }
+
+    public String getDays() {
+        return days;
+    }
+
+    public void setDays(String days) {
+        this.days = days;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }

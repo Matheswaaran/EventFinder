@@ -1,5 +1,7 @@
 package com.example.mat.eventfinder.Fragments;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,7 +32,7 @@ public class AddEventFragment extends Fragment {
     private DatabaseReference eventDatabaseRef;
     private FirebaseAuth firebaseAuth;
     List<Events> events;
-    private EditText title, startTime, endTime, location, desc, organiser;
+    private EditText title, startTime, startDate, endTime, endDate, location, desc, organiser, days, amount;
     private Button addEvent;
     FirebaseUser currentFirebaseUser;
 
@@ -60,8 +62,12 @@ public class AddEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_add_event, container, false);
 
         title = (EditText)view.findViewById(R.id.event_name);
+        days = (EditText)view.findViewById(R.id.event_numdays);
+        startDate = (EditText) view.findViewById(R.id.event_start_date);
         startTime = (EditText)view.findViewById(R.id.event_start_time);
+        endDate = (EditText)view.findViewById(R.id.event_end_day);
         endTime = (EditText)view.findViewById(R.id.event_end_time);
+        amount = (EditText)view.findViewById(R.id.event_amount);
         location = (EditText)view.findViewById(R.id.event_location);
         desc = (EditText)view.findViewById(R.id.event_desc);
         organiser = (EditText)view.findViewById(R.id.event_organiser);
@@ -85,25 +91,33 @@ public class AddEventFragment extends Fragment {
 
     private void clearData(){
         title.setText("");
+        startDate.setText("");
         startTime.setText("");
+        endDate.setText("");
         endTime.setText("");
         location.setText("");
         desc.setText("");
+        amount.setText("");
+        days.setText("");
         organiser.setText("");
     }
 
     private void insertEvent() {
         String event_name = title.getText().toString().trim();
+        String sDate = startDate.getText().toString().trim();
         String sTime = startTime.getText().toString().trim();
+        String eDate = endDate.getText().toString().trim();
         String eTime = endTime.getText().toString().trim();
         String loc = location.getText().toString().trim();
         String description = desc.getText().toString().trim();
         String organ = organiser.getText().toString().trim();
+        String numdays = days.getText().toString().trim();
+        String amt = amount.getText().toString().trim();
         String uid = currentFirebaseUser.getUid().toString();
 
         if (!TextUtils.isEmpty(event_name) && !TextUtils.isEmpty(sTime) && !TextUtils.isEmpty(eTime) && !TextUtils.isEmpty(loc) && !TextUtils.isEmpty(description) && !TextUtils.isEmpty(organ)){
             String id = eventDatabaseRef.push().getKey();
-            Events events = new Events(id,event_name,sTime,eTime,loc,description,organ,uid);
+            Events events = new Events(id,event_name,sDate,sTime,eDate,eTime,loc,description,organ,uid,numdays,amt);
             eventDatabaseRef.child(id).setValue(events);
             Toast.makeText(getContext(), "Event Added!", Toast.LENGTH_LONG).show();
             clearData();

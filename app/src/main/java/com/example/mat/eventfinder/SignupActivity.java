@@ -16,10 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private DatabaseReference firebaseDatabaseRef;
     private EditText username, password, rePassword;
     private Button btnSignup;
     private ProgressBar progressBar;
@@ -36,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
         rePassword = (EditText)findViewById(R.id.re_password);
         btnSignup = (Button)findViewById(R.id.btnSignUp);
         progressBar = (ProgressBar)findViewById(R.id.progressBar);
+
+        firebaseDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +82,8 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             progressBar.setVisibility(View.GONE);
                             if (task.isSuccessful()){
+
+
                                 Toast.makeText(SignupActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             }else{
                                 Toast.makeText(SignupActivity.this,"Registration Error",Toast.LENGTH_LONG).show();

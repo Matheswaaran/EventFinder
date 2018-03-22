@@ -25,10 +25,10 @@
             android:paddingTop="@dimen/padding_large">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/event_name"
+                android:id="@+id/interview_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Name"/>
+                android:hint="interview Name"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -39,26 +39,11 @@
             android:paddingTop="@dimen/padding_large">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/event_organiser"
+                android:id="@+id/interview_organiser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Organiser"/>
+                android:hint="interview Organiser"/>
         </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_numDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_large"
-            android:paddingTop="@dimen/padding_large">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/event_numdays"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="No. of Days"/>
-        </android.support.design.widget.TextInputLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,20 +53,6 @@
             android:orientation="horizontal"
             android:paddingBottom="@dimen/padding_large"
             android:weightSum="2">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_start_date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/event_start_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Start Date"
-                    android:inputType="textPersonName" />
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/text_input_layout_start_time"
@@ -90,36 +61,10 @@
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/event_start_time"
+                    android:id="@+id/interview_start_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Start Time"
-                    android:inputType="textPersonName" />
-            </android.support.design.widget.TextInputLayout>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_margin_large"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_large"
-            android:weightSum="2">
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/text_input_layout_end_day"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/event_end_day"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="End date"
                     android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
@@ -130,7 +75,7 @@
                 android:layout_weight="1">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/event_end_time"
+                    android:id="@+id/interview_end_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="End Time"
@@ -140,20 +85,6 @@
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/text_input_layout_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/padding_large"
-            android:paddingTop="@dimen/padding_large">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/event_amount"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Amount per Head"/>
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
             android:id="@+id/text_input_layout_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,10 +92,10 @@
             android:paddingTop="@dimen/padding_large">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/event_location"
+                android:id="@+id/interview_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Event Location"/>
+                android:hint="interview Location"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -182,7 +113,7 @@
             android:layout_marginEnd="8dp">
 
             <EditText
-                android:id="@+id/event_desc"
+                android:id="@+id/interview_desc"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:gravity="top"
@@ -199,12 +130,12 @@
             android:layout_height="30dp"/>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/event_btn_add"
+            android:id="@+id/interview_btn_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/color_accent"
-            android:text="Add Event"
+            android:text="Add interview"
             android:onClick="onClick"
             android:textColor="@color/white" />
 

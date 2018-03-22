@@ -37,8 +37,12 @@
                     android:icon="@android:drawable/ic_input_add"
                     android:title="Add Interview" />
                 <item
+                    android:id="@+id/viewMyInterviews"
+                    android:icon="@drawable/ic_menu_eye"
+                    android:title="View My Interview" />
+                <item
                     android:id="@+id/viewInterviews"
-                    android:icon="@drawable/ic_date_range_black_24dp"
+                    android:icon="@drawable/ic_menu_eye"
                     android:title="View Interviews" />
             </group>
         </menu>
