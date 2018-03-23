@@ -1,11 +1,10 @@
 package com.example.mat.eventfinder.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,13 +14,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mat.eventfinder.Adapters.ViewEventAdapter;
+import com.example.mat.eventfinder.EventDetailActivity;
 import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
 import com.example.mat.eventfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -99,7 +98,7 @@ public class ViewMyEventsFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Events events = eventsList.get(position);
-                Toast.makeText(getContext(), events.getEventId() + " is selected!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getContext(), EventDetailActivity.class).putExtra("eventId",events.getEventId().toString()));
             }
 
             @Override

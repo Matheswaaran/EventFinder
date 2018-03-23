@@ -30,8 +30,6 @@ public class AddEventFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private DatabaseReference eventDatabaseRef;
-    private FirebaseAuth firebaseAuth;
-    List<Events> events;
     private EditText title, startTime, startDate, endTime, endDate, location, desc, organiser, days, amount;
     private Button addEvent;
     FirebaseUser currentFirebaseUser;

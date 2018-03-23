@@ -23,6 +23,7 @@ import com.example.mat.eventfinder.Fragments.UserProfileFragment;
 import com.example.mat.eventfinder.Fragments.ViewEventsFragment;
 import com.example.mat.eventfinder.Fragments.ViewInterviewsFragment;
 import com.example.mat.eventfinder.Fragments.ViewMyEventsFragment;
+import com.example.mat.eventfinder.Fragments.ViewMyInterviewsFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -140,6 +141,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.viewInterviews){
             setTitle("Interviews");
             ft.replace(R.id.homeFrameLayout, new ViewInterviewsFragment());
+        } else if (id == R.id.viewMyInterviews){
+            setTitle("My Interviews");
+            ft.replace(R.id.homeFrameLayout, new ViewMyInterviewsFragment());
         } else if(id == R.id.addInterviews){
             setTitle("Add an Interview");
             ft.replace(R.id.homeFrameLayout, new AddInterviewFragment());

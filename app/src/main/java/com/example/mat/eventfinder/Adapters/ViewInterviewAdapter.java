@@ -48,8 +48,8 @@ public class ViewInterviewAdapter extends RecyclerView.Adapter<ViewInterviewAdap
     public void onBindViewHolder(ViewInterviewAdapter.MyViewHolder holder, int position) {
         Interviews events = interviewsList.get(position);
         holder.title.setText(events.getTitle());
-        holder.startTime.setText(events.getCompany());
-        holder.endTime.setText(events.getEligibility());
+        holder.startTime.setText(events.getOrganiser());
+        holder.endTime.setText(events.getSalaryPackage());
         holder.location.setText(events.getSalaryPackage());
     }
 

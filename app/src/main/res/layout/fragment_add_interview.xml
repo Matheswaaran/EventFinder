@@ -28,7 +28,35 @@
                 android:id="@+id/interview_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="interview Name"/>
+                android:hint="Interview Name"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_pos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/interview_pos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Position"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/interview_salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Salary Package"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -42,7 +70,21 @@
                 android:id="@+id/interview_organiser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="interview Organiser"/>
+                android:hint="Interview Organiser"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_large"
+            android:paddingTop="@dimen/padding_large">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/interview_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Interview Date"/>
         </android.support.design.widget.TextInputLayout>
 
         <LinearLayout
