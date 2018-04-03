@@ -2,6 +2,7 @@ package com.example.mat.eventfinder.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import com.example.mat.eventfinder.Adapters.ViewEventAdapter;
 import com.example.mat.eventfinder.Adapters.ViewInterviewAdapter;
-import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.Interviews;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
+import com.example.mat.eventfinder.InterviewDetailActivity;
 import com.example.mat.eventfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -99,12 +99,29 @@ public class ViewMyInterviewsFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Interviews interviews = interviewsList.get(position);
-                Toast.makeText(getContext(), interviews.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
-            }
+                startActivity(new Intent(getContext(), InterviewDetailActivity.class).putExtra("interviewId",interviews.getInterviewId().toString()));
 
+            }
             @Override
             public void onLongClick(View view, int position) {
+                Interviews interviews = interviewsList.get(position);
+                Query qry = interviewsDataRef.orderByChild("interviewId").equalTo(interviews.getInterviewId().toString());
 
+                qry.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        dataSnapshot.getRef().removeValue();
+                        Toast.makeText(getContext(),"Interview Deleted!",Toast.LENGTH_SHORT).show();
+                        android.support.v4.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.homeFrameLayout,new ViewMyInterviewsFragment());
+                        ft.commit();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }));
 
@@ -112,8 +129,6 @@ public class ViewMyInterviewsFragment extends Fragment {
     }
 
     private void prepareInterviewsData() {
-        progressDialog.setMessage("Loading Data");
-        progressDialog.show();
 
         interviewsDataRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -132,7 +147,7 @@ public class ViewMyInterviewsFragment extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getContext(),databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), databaseError.toException().toString(),Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
 
             }

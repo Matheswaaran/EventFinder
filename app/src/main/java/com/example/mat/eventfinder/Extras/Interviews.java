@@ -57,11 +57,11 @@ public class Interviews {
         this.salaryPackage = salaryPackage;
     }
 
-    public String getDate() {
+    public String getInterviewDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setInterviewDate(String date) {
         this.date = date;
     }
 

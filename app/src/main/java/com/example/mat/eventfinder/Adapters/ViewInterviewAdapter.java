@@ -5,8 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.Interviews;
 import com.example.mat.eventfinder.R;
 
@@ -20,7 +18,7 @@ public class ViewInterviewAdapter extends RecyclerView.Adapter<ViewInterviewAdap
     private List<Interviews> interviewsList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        public TextView title, startTime, endTime, location;
+        public TextView title, startTime, endTime, location, date;
 
         public MyViewHolder(View view){
             super(view);
@@ -29,11 +27,12 @@ public class ViewInterviewAdapter extends RecyclerView.Adapter<ViewInterviewAdap
             startTime = (TextView) view.findViewById(R.id.slot_start_time);
             endTime = (TextView) view.findViewById(R.id.slot_end_time);
             location = (TextView) view.findViewById(R.id.slot_location);
+            date = (TextView) view.findViewById(R.id.slot_date);
         }
     }
 
-    public ViewInterviewAdapter(List<Interviews> eventsList){
-        this.interviewsList = eventsList;
+    public ViewInterviewAdapter(List<Interviews> interviewsList){
+        this.interviewsList = interviewsList;
     }
 
     @Override
@@ -46,11 +45,12 @@ public class ViewInterviewAdapter extends RecyclerView.Adapter<ViewInterviewAdap
 
     @Override
     public void onBindViewHolder(ViewInterviewAdapter.MyViewHolder holder, int position) {
-        Interviews events = interviewsList.get(position);
-        holder.title.setText(events.getTitle());
-        holder.startTime.setText(events.getOrganiser());
-        holder.endTime.setText(events.getSalaryPackage());
-        holder.location.setText(events.getSalaryPackage());
+        Interviews interviews = interviewsList.get(position);
+        holder.title.setText(interviews.getTitle());
+        holder.startTime.setText(interviews.getStartTime());
+        holder.endTime.setText(interviews.getEndTIme());
+        holder.location.setText(interviews.getSalaryPackage());
+        holder.date.setText(interviews.getInterviewDate());
     }
 
     @Override

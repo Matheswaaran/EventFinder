@@ -2,6 +2,7 @@ package com.example.mat.eventfinder.Fragments;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.example.mat.eventfinder.Extras.Events;
 import com.example.mat.eventfinder.Extras.Interviews;
 import com.example.mat.eventfinder.Extras.RecyclerViewDecoration;
 import com.example.mat.eventfinder.Extras.RecyclerViewTouchListener;
+import com.example.mat.eventfinder.InterviewDetailActivity;
 import com.example.mat.eventfinder.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -96,9 +98,8 @@ public class ViewInterviewsFragment extends Fragment {
 
         recyclerView.addOnItemTouchListener(new RecyclerViewTouchListener(getContext(), recyclerView, new RecyclerViewTouchListener.ClickListener() {
             @Override
-            public void onClick(View view, int position) {
-                Interviews interviews = interviewsList.get(position);
-                Toast.makeText(getContext(), interviews.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+            public void onClick(View view, int position) {Interviews interviews = interviewsList.get(position);
+                startActivity(new Intent(getContext(), InterviewDetailActivity.class).putExtra("interviewId",interviews.getInterviewId().toString()));
             }
 
             @Override

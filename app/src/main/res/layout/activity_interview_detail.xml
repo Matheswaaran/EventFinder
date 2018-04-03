@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    tools:context="com.example.mat.eventfinder.InterviewDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/interview_details_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Interview Name"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Interview Position"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_salary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Salary Pacakge"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_organiser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Interview Organiser"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_organiser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Date of the Interview"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+
+        <LinearLayout
+            android:id="@+id/slidin_down_part"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/interview_timing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_medium"
+                android:text="Time"
+                android:textColor="@color/color_accent"
+                android:textSize="@dimen/text_size_extra_large"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ll_interview_loc"
+                android:orientation="horizontal"
+                android:padding="@dimen/padding_medium">
+
+                <TextView
+                    android:id="@+id/interview_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+                <View
+                    android:layout_width="@dimen/home_screen_divider_width"
+                    android:layout_height="match_parent"
+                    android:background="@color/secondary_text" />
+
+                <TextView
+                    android:id="@+id/interview_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_large" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Location"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="16dp"
+            android:background="@color/color_primary" />
+
+        <TextView
+            android:id="@+id/interview_details_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_medium"
+            android:text="Description"
+            android:textColor="@color/color_accent"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_margin_medium">
+
+            <TextView
+                android:id="@+id/interview_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary_text"
+                android:textSize="@dimen/text_size_large" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

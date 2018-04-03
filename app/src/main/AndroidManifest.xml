@@ -27,7 +27,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.mat.eventfinder.MainActivity" />
         </activity>
-        <activity android:name=".EventDetailActivity"></activity>
+        <activity android:name=".EventDetailActivity" />
+        <activity android:name=".InterviewDetailActivity"></activity>
     </application>
 
 </manifest>

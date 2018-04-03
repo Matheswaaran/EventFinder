@@ -14,8 +14,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class EventDetailActivity extends AppCompatActivity {
-    String eventId;
-    TextView eventName, eventOrg, eventStart, eventEnd, eventNumDays, eventAmt, eventLoc, eventDesc;
+    private String eventId;
+    private TextView eventName, eventOrg, eventStart, eventEnd, eventNumDays, eventAmt, eventLoc, eventDesc;
+    private DatabaseReference databaseReference;
+    private Query qry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,8 @@ public class EventDetailActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         eventId = bundle.getString("eventId");
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("events");
-        Query qry = databaseReference.child(eventId);
+        databaseReference = FirebaseDatabase.getInstance().getReference("events");
+        qry = databaseReference.child(eventId);
 
         qry.addValueEventListener(new ValueEventListener() {
             @Override
